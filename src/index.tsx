@@ -10,7 +10,6 @@ const client = new ApolloClient({
         fields: {
           launches: {
             merge(existing: any, incoming: any) {
-              debugger;
               return existing ? existing.concat(incoming) : incoming;
             }
           }
@@ -19,10 +18,6 @@ const client = new ApolloClient({
     }
   })
 });
-
-setTimeout(() => {
-  console.log(client.cache);
-}, 4000)
 
 const LAUNCHES_QUERY = gql`
   query Launches($offset: Int, $limit: Int) {
@@ -75,7 +70,7 @@ function LaunchesComponent() {
           variables: {
             offset: data!.launches.length,
           },
-          updateQuery: (prev: any) => prev
+          // updateQuery: (prev: any) => prev
         })
       }}>
         More
